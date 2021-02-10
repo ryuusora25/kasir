@@ -64,7 +64,7 @@
 											
 											<input name="nama_menu" type="text"
 												class="form-control<?php echo form_error('nama_menu') ? 'is-invalid':'' ?>  form-control-sm"
-												id="nama_menu" placeholder="Jeneg.e menu">
+												id="id_menu" placeholder="Jeneg.e menu">
 										</div>
 										<div class="invalid-feedback">
 											<?php echo form_error('nama_menu') ?>

@@ -118,7 +118,7 @@ class Kasirs extends CI_Controller
 			 if (count($result) > 0) {
 		  foreach ($result as $row)
 			   $arr_result[] = array(
-				  'jeneng'			=> $row->nama_menu,
+				  'jeneng'	=> $row->nama_menu,
 				  'rego'	=> $row->harga_menu,
 			  );
 			   echo json_encode($arr_result);

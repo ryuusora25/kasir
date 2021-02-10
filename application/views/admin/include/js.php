@@ -16,9 +16,13 @@
 	var BASE_URL = "<?php echo base_url(); ?>";
 	var data=['a'];
 	$(document).ready(function () {
-		$("#nama_menu").autocomplete({
+		$("#id_menu").autocomplete({
 			
-			source: BASE_URL+'admin/kasirs/auto/?/'
+			source: BASE_URL+'admin/kasirs/auto',
+			select: function (event, ui) {
+                    $('[name="nama_menu"]').val(ui.item.jenneg); 
+                    $('[name="harga_menu"]').val(ui.item.rego); 
+                }
 		
 		});
 	});

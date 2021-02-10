@@ -45,11 +45,14 @@ class Kasir_model extends CI_Model
     public function save()
     {
 		$post = $this->input->post();
+		$jum=$post["jumlah"];
+		$har=$post["harga_menu"];
+		$tot=$jum*$har;
 		
         $this->id_trans = $post["id_trans"];
         $this->id_menu = $post["id_menu"];
-		$this->jumlah = $post["jumlah"];
-		$this->total = '1';
+		$this->jumlah = $jum;
+		$this->total = $tot;
 		$this->tanggal_trans = date("Y-m-d");
         //$this->description = $post["description"];
         return $this->db->insert($this->_table, $this);
