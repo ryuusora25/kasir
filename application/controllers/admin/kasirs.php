@@ -9,6 +9,7 @@ class Kasirs extends CI_Controller
         parent::__construct();
 		$this->load->model("kasir_model","kasir_model");
 		$this->load->model("menu_model","menu_model");
+		$this->load->model("bayar_model","bayar_model");
         $this->load->library('form_validation');
     }
 
@@ -51,26 +52,29 @@ class Kasirs extends CI_Controller
 		// $q=$this->db->select('*')->where('id_trans',$id_trans)->get('transaksi_detail');
 		// $hasil=$q->result();	
 		// $data['ka']=$hasil;
-		$id_trans= $this->input->post('id_trans');
+		//$id_trans= $this->input->post('id_trans');
 
-		$q=$this->db->select('id_trans')->from('transaksi')->order_by('id_trans','desc')->limit(1)->get();
-				$hasil=$q->result();
-						foreach($hasil as $row){
-							$id_trans=$row->id_trans;
-						}
-							if($q->num_rows() > 0){
-								$a=substr($id_trans,2);
-								$id_m=$a+1;
-								$id_trans='TR'.$id_m;
-							}else{
+		// $q=$this->db->select('id_trans')->from('transaksi')->order_by('id_trans','desc')->limit(1)->get();
+		// 								$hasil=$q->result();
+		// 								foreach($hasil as $row){
+		// 									$id=$row->id_trans;
+		// 								}
+		// 								if($q->num_rows() > 0){
+		// 									$a=substr($id,2);
+		// 									$id_a=$a+1;
+		// 									$nn=strval($id_a);
+		// 									$id_m='TR'.$nn;
+											
+		// 								}else{
 								
-							$id_trans='TR1';
-								
-							}
+		// 									$id_m='TR1';
+											
+		// 								}
+		$id_m='TR2';
+										$data["a"]=$this->kasir_model->join($id_m)->result();
+											
 
-
-
-		$data['a']=$this->kasir_model->join($id_trans);
+		
 	
 
         $this->load->view('admin/kasir/kasir',$data);
@@ -95,14 +99,31 @@ class Kasirs extends CI_Controller
         $this->load->view("admin/edit_menu", $data);
     }
 
-    public function delete($id_trans=null)
+    public function delete($id=null)
     {
-        if (!isset($id_trans)) show_404();
+        if (!isset($id)) show_404();
         
-        if ($this->kasir_model->delete($id_trans)) {
-            redirect(base_url('admin/menus'));
+        if ($this->kasir_model->delete($id)) {
+            redirect(base_url('admin/kasirs/add'));
         }
 	}
+	public function mbayar()
+    {
+		//$data["bayars"] = $this->bayar_model->getAll();
+        $bayar = $this->bayar_model;
+        $validation = $this->form_validation;
+        $validation->set_rules($bayar->rules());
+
+        if ($validation->run()) {
+            $bayar->save();
+			$this->session->set_flashdata('success', 'Berhasil disimpan');
+			redirect(base_url('admin/kasirs/add'));
+			
+        }	
+
+       // $this->load->view('admin/kasir/kasir',$data);
+    }
+
 
 	
 

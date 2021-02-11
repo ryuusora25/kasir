@@ -69,9 +69,9 @@ class Kasir_model extends CI_Model
         return $this->db->update($this->_table, $this, array('id_menu' => $post['id_menu']));
     }
 
-    public function delete($id_trans)
+    public function delete($id)
     {
-        return $this->db->delete($this->_table, array("id_trans" => $id_trans));
+        return $this->db->delete($this->_table, array("id" => $id));
 	}
 	
 	public function join($id_trans)
@@ -80,8 +80,8 @@ class Kasir_model extends CI_Model
 		$this->db->from('menu');
 		$this->db->join('transaksi_detail','menu.id_menu=transaksi_detail.id_menu');
 		$this->db->where('transaksi_detail.id_trans',$id_trans);
-		$query = $this->db->get();
-		return $query->result();
+		
+		return $this->db->get();
 		
 	}
 

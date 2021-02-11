@@ -1,6 +1,6 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Kasir_model extends CI_Model
+class Bayar_model extends CI_Model
 {
     private $_table = "transaksi";
 
@@ -19,8 +19,8 @@ class Kasir_model extends CI_Model
         return [
 			
 			
-            ['field' => 'jumlah',
-            'label' => 'Jumlahnya oi',
+            ['field' => 'bayar',
+            'label' => 'Bayar oi',
             'rules' => 'required'],
 
            
@@ -46,11 +46,11 @@ class Kasir_model extends CI_Model
     {
 		$post = $this->input->post();
 		
-        $this->id_trans = $post["id_trans"];
-		$this->jumlah = $post["total"];
+        $this->id_trans = $post["id"];
+		$this->total = $post["total"];
 		$this->jenis_bayar = $post["jenis_bayar"];
 		$this->pengutang = $post["pengutang"];
-		$this->tanggal_trans = date("Y-m-d");
+		$this->tanggal = date("Y-m-d");
         //$this->description = $post["description"];
         return $this->db->insert($this->_table, $this);
     }

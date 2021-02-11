@@ -57,3 +57,4 @@ $route['admin'] = 'admin/admin';
 $route['menu'] = 'admin/admin/tambah_menu';
 $route['v_menu'] = 'admin/admin/v_menu';
 $route['kasir'] = 'admin/admin/kasirs';
+$route['bayar'] = 'admin/admin/bayars';

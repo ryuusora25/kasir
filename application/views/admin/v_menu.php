@@ -1,4 +1,4 @@
-< !DOCTYPE html>
+<!DOCTYPE html>
 	<html lang="en">
 
 	<head>
@@ -43,8 +43,9 @@ function deleteConfirm(url){
 										<td><?php echo $menu->tipe ?></td>
 										<td>
 										<a class="btn btn-success" href="<?php echo base_url('admin/menus/edit/'.$menu->id_menu) ?>" role="button">Edit</a>
-										<a onclick="deleteConfirm('<?php echo site_url('admin/menus/delete/'.$menu->id_menu) ?>')"
-    href="#!" class="btn btn-danger"><i class="fas fa-trash"></i> Hapus</a>
+										<a href="<?php echo base_url('admin/kasirs/delete/'.$menu->id_menu) ?>" 
+											onclick="return confirm('Anda yakin mau menghapus item ini ?')" class="btn btn-danger"><i class="fas fa-trash"></i>
+													Hapus</a>
 										</td>
 									</tr>
 								<?php endforeach; ?>

@@ -8,9 +8,23 @@
 <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
 <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
 <script src="<?php echo base_url('assets/demo/datatables-demo.js');?>"></script>
+
 <script type="text/javascript" src="<?php echo base_url('js/jquery-3.5.1.js');?>"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
 <script type="text/javascript" src="<?php echo base_url('js/ui/jquery-ui.js');?>"></script>
 
+<script type='text/javascript'>
+$(window).load(function(){
+$("#jenis_bayar").change(function() {
+			console.log($("#jenis_bayar option:selected").val());
+			if ($("#jenis_bayar option:selected").val() == '1') {
+				$('#pengutang').prop('hidden', 'true');
+			} else {
+				$('#pengutang').prop('hidden', false);
+			}
+		});
+});
+</script>
 
 <script type="text/javascript">
 	var BASE_URL = "<?php echo base_url(); ?>";
@@ -30,13 +44,8 @@
 </script>
 
 
-<script>
-	function deleteConfirm(url) {
-		$('#btn-delete').attr('href', url);
-		$('#deleteModal').modal();
-	}
 
-</script>
+
 <script>
 	function validate(evt) {
 		var theEvent = evt || window.event;

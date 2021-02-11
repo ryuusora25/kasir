@@ -45,7 +45,7 @@ class Menus extends CI_Controller
             $this->session->set_flashdata('success', 'Berhasil disimpan');
         }
 
-        $data["menus"] = $menu->getById($id_menu);
+        $data["menus"] = $menu->getMenu($id_menu);
         if (!$data["menus"]) show_404();
         
         $this->load->view("admin/edit_menu", $data);

@@ -87,4 +87,4 @@ defined('EXIT__AUTO_MAX')      OR define('EXIT__AUTO_MAX', 125); // highest auto
 
 //nama site
 
-define('SITE_NAME','Warung');
+define('SITE_NAME','Pokok.e Warung');
