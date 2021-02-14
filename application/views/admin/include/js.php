@@ -10,8 +10,57 @@
 <script src="<?php echo base_url('assets/demo/datatables-demo.js');?>"></script>
 
 <script type="text/javascript" src="<?php echo base_url('js/jquery-3.5.1.js');?>"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="<?php echo base_url('js/jquery.min.js');?>"></script>
 <script type="text/javascript" src="<?php echo base_url('js/ui/jquery-ui.js');?>"></script>
+
+<script type="text/javascript">
+// $(document).ready(function(){
+// var data=['a'];
+// $('#id_menu').autocomplete({
+// 	source: "<?php //echo base_url('admin/menus/guolek');?>",
+// 	select:
+// 	function(event, ui){
+//              document.getElementById("id_menu").value = ui.item.id;
+//   			document.getElementById("harga_menu").value = ui.item.jeneng;
+// 	}
+	
+	
+// });
+
+// });
+
+ $(function(){
+     $('#id_menu').autocomplete({
+     
+	
+         source: function(reqst, respn){
+             $.ajax({
+                 type: 'POST',
+                 url: "<?php echo base_url('admin/menus/guolek') ?>",
+                 dataType: 'json',
+                 data: reqst,
+                 success: function(data){
+                     if(data.status = 'true'){
+                         respn(data.message);
+                     }
+                 }
+             });
+         },
+		 minLength:1,
+		 delay:500, 
+         select:
+         function(event, ui){
+             document.getElementById("id_menu").value = ui.item.id;
+ 			document.getElementById("nama_menu").value = ui.item.jeneng;
+ 			document.getElementById("harga_menu").value = ui.item.rego;
+            
+         }
+		 
+     });
+	 
+	 $( "#tipe" ).selectmenu();
+ });
+</script>
 
 <script type='text/javascript'>
 $(window).load(function(){
@@ -21,29 +70,11 @@ $("#jenis_bayar").change(function() {
 				$('#pengutang').prop('hidden', 'true');
 			} else {
 				$('#pengutang').prop('hidden', false);
+				document.getElementById("bayar").value = '0';
 			}
 		});
 });
 </script>
-
-<script type="text/javascript">
-	var BASE_URL = "<?php echo base_url(); ?>";
-	var data=['a'];
-	$(document).ready(function () {
-		$("#id_menu").autocomplete({
-			
-			source: BASE_URL+'admin/kasirs/auto',
-			select: function (event, ui) {
-                    $('[name="nama_menu"]').val(ui.item.jenneg); 
-                    $('[name="harga_menu"]').val(ui.item.rego); 
-                }
-		
-		});
-	});
-
-</script>
-
-
 
 
 <script>

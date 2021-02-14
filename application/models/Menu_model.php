@@ -38,6 +38,14 @@ class Menu_model extends CI_Model
     {
         return $this->db->get($this->_table)->result();
     }
+
+	public function golek($nama_menu){
+        $this->db->like('nama_menu', $nama_menu , 'both');
+		$this->db->order_by('nama_menu', 'ASC');
+		$this->db->limit(10);
+		return $this->db->get('menu')->result();
+	
+	}
     
     public function getMenu($id_menu)
     {
@@ -91,13 +99,7 @@ class Menu_model extends CI_Model
 
 	
 
-	function golek($nama_menu){
-        $this->db->like('nama_menu', $nama_menu , 'both');
-		$this->db->order_by('nama_menu', 'ASC');
-		$this->db->limit(10);
-		return $this->db->get('menu')->result();
 	
-	}
 	function golekMenu($id_menu){
 
 		$response = array();

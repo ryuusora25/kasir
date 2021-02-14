@@ -45,16 +45,24 @@ class Kasir_model extends CI_Model
     public function save()
     {
 		$post = $this->input->post();
+		$id_menu=$post["id_menu"];
+
+		$query=$this->db->select('harga_menu')->from('menu')->where('id_menu',$id_menu)->get()->result();
+		foreach($query as $qq){
+			$har=$qq->harga_menu;
+		}
+
+
+		
 		$jum=$post["jumlah"];
-		$har=$post["harga_menu"];
 		$tot=$jum*$har;
 		
         $this->id_trans = $post["id_trans"];
-        $this->id_menu = $post["id_menu"];
+        $this->id_menu = $id_menu;
 		$this->jumlah = $jum;
 		$this->total = $tot;
 		$this->tanggal_trans = date("Y-m-d");
-        //$this->description = $post["description"];
+      
         return $this->db->insert($this->_table, $this);
     }
 
@@ -65,7 +73,7 @@ class Kasir_model extends CI_Model
         $this->nama_menu = $post["nama_menu"];
 		$this->harga_menu = $post["harga_menu"];
 		$this->tipe = $post["tipe"];
-        //$this->description = $post["description"];
+        
         return $this->db->update($this->_table, $this, array('id_menu' => $post['id_menu']));
     }
 
@@ -74,14 +82,28 @@ class Kasir_model extends CI_Model
         return $this->db->delete($this->_table, array("id" => $id));
 	}
 	
-	public function join($id_trans)
+	public function join()
     {
+		$q=$this->db->select('id_trans')->from('transaksi')->order_by('id_trans','desc')->limit(1)->get();
+				$hasil=$q->result();
+				foreach($hasil as $row){
+					$id=$row->id_trans;
+				}
+				if($q->num_rows() > 0){
+					$a=substr($id,2);
+					$id_a=$a+1;
+					$id_trans='TR0'.$id_a;
+				}else{
+								
+					$id_trans='TR1';										
+				}
 		$this->db->select('*');
 		$this->db->from('menu');
 		$this->db->join('transaksi_detail','menu.id_menu=transaksi_detail.id_menu');
 		$this->db->where('transaksi_detail.id_trans',$id_trans);
-		
-		return $this->db->get();
+		$query = $this->db->get();
+		if($query->num_rows() > 0)
+		return $query->result_array();
 		
 	}
 

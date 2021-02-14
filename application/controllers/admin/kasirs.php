@@ -11,6 +11,7 @@ class Kasirs extends CI_Controller
 		$this->load->model("menu_model","menu_model");
 		$this->load->model("bayar_model","bayar_model");
         $this->load->library('form_validation');
+		
     }
 
     public function index()
@@ -20,8 +21,11 @@ class Kasirs extends CI_Controller
         $this->load->view('admin/kasir/kasir', $data);
     }
 
+	
+ 
+
 	function get_menu($id_menu){
-        $hsl=$this->db->query("SELECT * FROM menu WHERE kode='$id_menu'");
+        $hsl=$this->db->query("SELECT * FROM menu WHERE id_menu='$id_menu'");
         if($hsl->num_rows()>0){
             foreach ($hsl->result() as $data) {
                 $hasil=array(
@@ -36,7 +40,8 @@ class Kasirs extends CI_Controller
 	
     public function add()
     {
-		$data["kasirs"] = $this->kasir_model->getAll();
+	//	$data["kasirs"] = $this->kasir_model->getAll();
+	
         $kasir = $this->kasir_model;
         $validation = $this->form_validation;
         $validation->set_rules($kasir->rules());
@@ -47,35 +52,14 @@ class Kasirs extends CI_Controller
 			redirect(base_url('admin/kasirs/add'));
 			
         }
-		// $id_trans= $this->input->post("id_trans");
-		// //$q=$this->db->select("select * from transaksi_detail where id_trans='$kasir->id_trans'")->get();
-		// $q=$this->db->select('*')->where('id_trans',$id_trans)->get('transaksi_detail');
-		// $hasil=$q->result();	
-		// $data['ka']=$hasil;
-		//$id_trans= $this->input->post('id_trans');
+		
 
-		// $q=$this->db->select('id_trans')->from('transaksi')->order_by('id_trans','desc')->limit(1)->get();
-		// 								$hasil=$q->result();
-		// 								foreach($hasil as $row){
-		// 									$id=$row->id_trans;
-		// 								}
-		// 								if($q->num_rows() > 0){
-		// 									$a=substr($id,2);
-		// 									$id_a=$a+1;
-		// 									$nn=strval($id_a);
-		// 									$id_m='TR'.$nn;
-											
-		// 								}else{
-								
-		// 									$id_m='TR1';
-											
-		// 								}
-		$id_m='TR2';
-										$data["a"]=$this->kasir_model->join($id_m)->result();
+		
+			$data["a"]=$this->kasir_model->join();
 											
 
 		
-	
+										$data["menus"] = $this->menu_model->getAll();
 
         $this->load->view('admin/kasir/kasir',$data);
     }
@@ -133,17 +117,17 @@ class Kasirs extends CI_Controller
         $cari =$this->menu_model->getMenu($id_menu)->result();
         echo json_encode($cari);
     } 
+
 	function auto(){
 		if (isset($_GET['term'])) {
 			$result = $this->menu_model->golek($_GET['term']);
 			 if (count($result) > 0) {
 		  foreach ($result as $row)
-			   $arr_result[] = array(
-				  'jeneng'	=> $row->nama_menu,
-				  'rego'	=> $row->harga_menu,
-			  );
+			   $arr_result[] = $row->harga_menu;
 			   echo json_encode($arr_result);
+			   
 			 }
+
 	  }
     }
 	public function data()
@@ -172,5 +156,6 @@ class Kasirs extends CI_Controller
         echo json_encode( $data);
     }
 
+    
 
 }

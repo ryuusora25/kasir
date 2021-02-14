@@ -3,27 +3,7 @@
 
 <head>
 	<?php $this->load->view("admin/include/head.php") ?>
-	<script>
-			function validate(evt) {
-				var theEvent = evt || window.event;
-
-				// Handle paste
-				if (theEvent.type === 'paste') {
-					key = event.clipboardData.getData('text/plain');
-				} else {
-					// Handle key press
-					var key = theEvent.keyCode || theEvent.which;
-					key = String.fromCharCode(key);
-				}
-				var regex = /[0-9]|\./;
-				if (!regex.test(key)) {
-					theEvent.returnValue = false;
-					if (theEvent.preventDefault) theEvent.preventDefault();
-				}
-			}
-
-		</script>
-
+	
 </head>
 
 <body class="sb-nav-fixed">
@@ -55,16 +35,17 @@
 							}
 							if($q->num_rows() > 0){
 								$a=substr($id,2);
-								$id_m=$a+1;
+								$id_a=$a+1;
+								$id_m='MN0'.$id_a;
 							}else{
 								
-								$id_m='1';
+								$id_m='MN01';
 								
 							}
 						?>
 						<div class="form-group">
 								<label for="exampleFormControlInput1">Kode</label>
-								<input type="text" name="id_menu" class="form-control" id="autocomplete" value="<?php echo 'MN'.$id_m;?>" readonly>
+								<input type="text" name="id_menu" class="form-control" id="autocomplete" value="<?php echo $id_m;?>" readonly>
 							</div>
 								
 							<div class="form-group">
@@ -83,9 +64,9 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="exampleFormControlSelect1">Tipe</label>
-								<select class="form-control <?php echo form_error('tipe') ? 'is-invalid':'' ?>" id="exampleFormControlSelect1" name="tipe">
-									<option value="">Pilien</option>
+								<label for="tipe">Tipe</label><br>
+								<select class="form-control <?php echo form_error('tipe') ? 'is-invalid':'' ?>" id="tipe" name="tipe">
+									<option disabled selected>Pilien</option>
 									<option value="1">Sego-segoan</option>
 									<option value="2">Jajan-jajanan</option>
 								</select>

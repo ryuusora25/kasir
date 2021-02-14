@@ -17,6 +17,26 @@ class Menus extends CI_Controller
         $this->load->view('admin/v_menu', $data);
     }
 
+	public function guolek(){
+        $key = $this->input->post('term');
+        
+        if(!empty($key)){            
+            $stock['message'] = array();
+             
+            $listBrg = $this->menu_model->golek($key);
+            foreach($listBrg as $item){
+                $stock['message'][] = array(
+				"id"=>$item->id_menu, 
+				"jeneng"=>$item->nama_menu, 
+				"rego"=>$item->harga_menu
+                );                
+            }            
+             
+            $result = json_encode($stock);
+            echo $result;        
+        }
+    }
+
     public function add()
     {
         $menu = $this->menu_model;
@@ -66,7 +86,7 @@ class Menus extends CI_Controller
             $result = $this->menu_model->golek($_GET['term']);
             if (count($result) > 0) {
             foreach ($result as $row)
-                $arr_result[] = $row->nama_menu ;
+                $arr_result[] = $row->id_menu ;
                 echo json_encode($arr_result);
 				
             }
