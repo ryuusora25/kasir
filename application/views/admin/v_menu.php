@@ -16,31 +16,43 @@ function deleteConfirm(url){
 		<div id="layoutSidenav_content">
 			<main>
 				<!--isi-->
-				<div class="container-fluid">
-					<h1 class="mt-4"> Menu</h1>
-					<!-- Isi -->
-					<div class="card mb-4">
-						<div class="card-header">
-
-							Menu
-						</div>
-						
-						<div class="table-responsive">
-							<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+				<div class="card mb-4">
+                            <div class="card-header">
+                                <i class="fas fa-table mr-1"></i>
+                                Tabel Menu Makanan
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 								<thead>
 									<tr>
-										<td>Nama Menu</td>
-										<td>Harga</td>
-										<td>Jenis Menu</td>
-										<td>Aksi</td>
+										<th>Nama Menu</th>
+										<th>Harga</th>
+										<th>Jenis Menu</th>
+										<th>Aksi</th>
 									</tr>
 								</thead>
+								<tfoot>
+									<tr>
+										<th>Nama Menu</th>
+										<th>Harga</th>
+										<th>Jenis Menu</th>
+										<th>Aksi</th>
+									</tr>
+								<tfoot>
 								<tbody>
-								<?php foreach ($menus as $menu): ?>
+								
+								<?php foreach ($menus as $menu):
+										if($menu->tipe=='1'){
+											$tipe='Sego-segoan';
+										}elseif($menu->tipe=='2'){
+											$tipe='Jajan-jajanan';
+										}
+									?>
 									<tr>
 										<td><?php echo $menu->nama_menu ?></td>
 										<td><?php echo $menu->harga_menu ?></td>
-										<td><?php echo $menu->tipe ?></td>
+										<td><?php echo $tipe ?></td>
 										<td>
 										<a class="btn btn-success" href="<?php echo base_url('admin/menus/edit/'.$menu->id_menu) ?>" role="button">Edit</a>
 										<a href="<?php echo base_url('admin/kasirs/delete/'.$menu->id_menu) ?>" 
@@ -49,6 +61,7 @@ function deleteConfirm(url){
 										</td>
 									</tr>
 								<?php endforeach; ?>
+								
 								</tbody>
 
 							</table>

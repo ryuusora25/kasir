@@ -22,8 +22,8 @@
 			<div class="container-fluid">
 
 
-				<h1 class="mt-4"> Transaksi</h1>
-				<?php $this->load->view("admin/include/breadcumb.php") ?>
+				<h1 class="mt-4"> Transaksi (Sementara Jek.an)</h1>
+		
 				<!-- Isi -->
 				<div class="card ">
 					<div class="card-header">
@@ -37,16 +37,17 @@
 								<?php
 										$q=$this->db->select('id_trans')->from('transaksi')->order_by('id_trans','desc')->limit(1)->get();
 										$hasil=$q->result();
+										$ta=date('Ym');
 										foreach($hasil as $row){
 											$id=$row->id_trans;
 										}
 										if($q->num_rows() > 0){
-											$a=substr($id,2);
+											$a=substr($id,2); //tr 0010
 											$id_a=$a+1;
 											$id_m='TR'.$id_a;
 										}else{
 								
-											$id_m='TR1';
+											$id_m='TR'.$ta.'1';
 								
 										}
 									?>
@@ -117,12 +118,12 @@
 								<table class="table table-striped" width="100%" cellspacing="0">
 									<thead>
 										<tr>
-											<td>Nama Menu</td>
-											<td>Harga</td>
-											<td>Jumlah</td>
-											<td>total</td>
+											<th>Nama Menu</th>
+											<th>Harga</th>
+											<th>Jumlah</th>
+											<th>total</th>
 
-											<td>Aksi</td>
+											<td>Aksi</th>
 										</tr>
 									</thead>
 									<tbody>
@@ -138,12 +139,6 @@
 										$q_k=$this->db->select('*')->from('transaksi_detail')->where('id_trans',$id_m)->get();
 										$q_k_r=$q_k->result();
 										
-										if($q_k->num_rows() < 0){
-											$nama='-';
-											$jumlah='-';
-											$total='-';
-											$rego='-';
-										}else{
 											foreach($q_k_r as $kasir):
 												$jumlah=$kasir->jumlah;
 												$total=$kasir->total;
@@ -158,8 +153,14 @@
 										<tr>
 
 											<td><?php echo $nama?></td>
-											<td><?php echo $jumlah?></td>
 											<td><?php echo 'Rp. '.number_format($rego)?></td>
+											<td><?php echo $jumlah?>
+											<a href="<?php echo base_url('admin/kasirs/edit/'.$kasir->id) ?>"
+													onclick="return confirm('Anda yakin mau menghapus item ini ?')"
+													class="btn btn-success">ganti</a>
+											
+											</td>
+											
 											<td><?php echo 'Rp. '.number_format($total)?></td>
 
 											<td>
@@ -170,14 +171,14 @@
 											</td>
 
 										</tr>
-										<?php  endforeach; endforeach; }?>
+										<?php  endforeach; endforeach; ?>
 										<tr>
-											<td>Nama Menu</td>
-											<td>Harga</td>
-											<td>Jumlah</td>
-											<td>total</td>
+										<th>Nama Menu</th>
+											<th>Harga</th>
+											<th>Jumlah</th>
+											<th>total</th>
 
-											<td>Aksi</td>
+											<td>Aksi</th>
 										</tr>
 									</tbody>
 

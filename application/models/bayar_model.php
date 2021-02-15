@@ -42,6 +42,22 @@ class Bayar_model extends CI_Model
         return $this->db->get_where($this->_table, ["id_trans" => $id_trans])->result();
     }
 
+	public function getPerTanggal($tanggal)
+    {
+		
+        return $this->db->get_where($this->_table, ["tanggal" => $tanggal])->result();
+    }
+	public function getPerBl($tanggal)
+    {
+		
+        return $this->db->get_where($this->_table, ["month(tanggal)" => $tanggal])->result();
+    }
+	public function getPerTh($tanggal)
+    {
+		
+        return $this->db->get_where($this->_table, ["year(tanggal)" => $tanggal])->result();
+    }
+
     public function save()
     {
 		$post = $this->input->post();

@@ -51,8 +51,6 @@ class Kasir_model extends CI_Model
 		foreach($query as $qq){
 			$har=$qq->harga_menu;
 		}
-
-
 		
 		$jum=$post["jumlah"];
 		$tot=$jum*$har;

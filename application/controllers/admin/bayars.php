@@ -15,8 +15,15 @@ class Bayars extends CI_Controller
     public function index()
     {
 		$data["bayars"] = $this->bayar_model->getAll();
+
+		$tangal=date("Y-m-d");
+		$bl=date('m');
+		$th=date('Y');
+		$data['pertg'] =$this->bayar_model->getPerTanggal($tangal);
+		$data['bl'] =$this->bayar_model->getPerBl($bl);
+		$data['th'] =$this->bayar_model->getPerTh($th);
 	
-      //  $this->load->view('admin/kasir/kasir', $data);
+        $this->load->view('admin/report/report', $data);
     }
 
 	public function getId($id_trans)

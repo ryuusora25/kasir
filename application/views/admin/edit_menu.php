@@ -17,7 +17,7 @@
 				<?php endif; ?>
 
 			<div class="container-fluid">
-				<h1 class="mt-4">Tambah Menu</h1>
+				<h1 class="mt-4">Edit Menu</h1>
 				<!-- Isi -->
 				<div class="card mb-4">
 					<div class="card-header">
@@ -49,9 +49,10 @@
 								</div>
 							</div>
 							<div class="form-group">
-								<label for="exampleFormControlSelect1">Tipe</label>
-								<select class="form-control <?php echo form_error('tipe') ? 'is-invalid':'' ?>" id="exampleFormControlSelect1" name="tipe">
+								<label for="exampleFormControlSelect1">Tipe</label><br>
+								<select class="form-control <?php echo form_error('tipe') ? 'is-invalid':'' ?>" id="tipe" name="tipe">
 									<option value="<?php echo $menus->tipe ?>"><?php if($menus->tipe=1){ echo "Sego-segoan";}elseif($menus->tipe=2){echo"Jajanjanan";} ?></option>
+									<option value="">--------------------------</option>
 									<option value="1">Sego-segoan</option>
 									<option value="2">Jajan-jajanan</option>
 								</select>

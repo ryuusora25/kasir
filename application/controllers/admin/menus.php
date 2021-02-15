@@ -63,6 +63,7 @@ class Menus extends CI_Controller
         if ($validation->run()) {
 			$menu->update();
             $this->session->set_flashdata('success', 'Berhasil disimpan');
+			redirect(base_url('admin/menus'));
         }
 
         $data["menus"] = $menu->getMenu($id_menu);
@@ -86,7 +87,10 @@ class Menus extends CI_Controller
             $result = $this->menu_model->golek($_GET['term']);
             if (count($result) > 0) {
             foreach ($result as $row)
-                $arr_result[] = $row->id_menu ;
+                $arr_result[] = array(
+					'id'=>$row->id_menu,
+					'rego'=>$row->harga_menu
+				) ;
                 echo json_encode($arr_result);
 				
             }

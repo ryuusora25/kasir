@@ -34,13 +34,19 @@
 								$id=$row->id_menu;
 							}
 							if($q->num_rows() > 0){
-								$a=substr($id,2);
+								$a=substr($id,2); //tr 0010
 								$id_a=$a+1;
-								$id_m='MN0'.$id_a;
+								if($id_a<10){
+									$id_m='MN000'.$id_a;
+								}elseif(($id_a>=10) and ($id_a<=99)){
+									$id_m='MN00'.$id_a;
+								}elseif(($id_a>=100) and ($id_a<=999)){
+									$id_m='MN0'.$id_a;
+								}
 							}else{
-								
-								$id_m='MN01';
-								
+					
+								$id_m='MN0001';
+					
 							}
 						?>
 						<div class="form-group">

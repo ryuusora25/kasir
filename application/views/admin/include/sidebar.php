@@ -33,7 +33,7 @@
 					</a>
 					<!-- laporan -->
 					<div class="sb-sidenav-menu-heading">Pelaporan</div>
-					<a class="nav-link" href="<?php echo base_url('admin/admin') ?>">
+					<a class="nav-link" href="<?php echo base_url('admin/bayars') ?>">
 						<div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
 						Laporan
 					</a>
